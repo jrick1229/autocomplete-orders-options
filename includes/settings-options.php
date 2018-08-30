@@ -1,6 +1,5 @@
 <?php
 
-
 /**
  * Add settings tab
  */
@@ -13,8 +12,6 @@ class WC_autocomplete_Settings {
         add_filter( 'woocommerce_subscription_settings', __CLASS__ . '::add_settings', 10, 1 );
     }
 
-    
-    
     public static function add_settings( $settings ) {
 
 		return array_merge( $settings, array(
@@ -39,8 +36,9 @@ class WC_autocomplete_Settings {
             ),
 			array( 'type' => 'sectionend', 'id' => self::$option_prefix ),
 		) );
+        
 	}
-    
+        
 }
 WC_autocomplete_Settings::init();
 
@@ -49,20 +47,12 @@ WC_autocomplete_Settings::init();
  * What to do based on the selected option from above
  */
 
-
-
-if ( get_option( WC_autocomplete_Settings::$option_prefix, 'all_orders' ) ) {
+if ( 'all_orders' == get_option( WC_autocomplete_Settings::$option_prefix ) ) {
     
-    /**
-     * Autocomplete 'simple' orders
-     */
     add_action( 'woocommerce_thankyou', 'custom_woocommerce_auto_complete_order' );
-    /**
-     * Updates the status of a correctly processed order to 'Complete'
-     *
-     * @param int $order_id The current order ID.
-     */
-    function custom_woocommerce_auto_complete_order( $order_id ) { 
+    
+    function custom_woocommerce_auto_complete_order( $order_id ) {
+        
         if ( ! $order_id ) {
             return;
         }
@@ -71,27 +61,24 @@ if ( get_option( WC_autocomplete_Settings::$option_prefix, 'all_orders' ) ) {
         $order->update_status( 'completed' );
     }
     
-}
-elseif ( get_option( WC_autocomplete_Settings::$option_prefix, 'subscription_orders' ) ) {
+    add_filter( 'woocommerce_payment_complete_order_status', 'wcs_aco_return_completed', 10, 3);
     
-    /**
-     * Autocomplete subscription 'parent' and 'renewal' orders
-     */
+    function wcs_aco_return_completed( $status, $order, $order_id ) {
+        
+        if( wcs_order_contains_subscription($order, array('parent','renewal') ) ) {
+            return 'completed';
+        }
+
+        return $status;
+    }
+    
+}
+elseif ( 'subscription_orders' == get_option( WC_autocomplete_Settings::$option_prefix ) ) {
 
     add_filter( 'woocommerce_payment_complete_order_status', 'wcs_aco_return_completed', 10, 3);
-    /**
-     * Return "completed" as an order status.
-     *
-     * This should be attached to the woocommerce_payment_complete_order_status hook.
-     *
-     * @since 1.1.0
-     *
-     * @param string $status The current default status.
-     * @param object $order The current order.
-     * @param int $order_id The current order ID.
-     * @return string The filtered default status.
-     */
+    
     function wcs_aco_return_completed( $status, $order, $order_id ) {
+        
         if( wcs_order_contains_subscription($order, array('parent','renewal') ) ) {
             return 'completed';
         }

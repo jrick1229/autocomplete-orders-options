@@ -29,7 +29,7 @@ class WC_autocomplete_Settings {
                 'type'     => 'select',
                 'options'  => array(
                     'none'        => _x( 'Never (do not autocomplete any orders)', 'woocommerce-autocomplete-orders' ),
-                    'subscription_orders'   => _x( 'Subscription orders only (orders that contain a susbcription product)', 'woocommerce-autocomplete-orders' ),
+                    'subscription_orders'   => _x( 'Subscription orders only (orders that contain a subscription product)', 'woocommerce-autocomplete-orders' ),
                     'all_orders' => _x( 'All Orders (all orders after payment is completed)', 'woocommerce-autocomplete-orders' ),
                 ),
                 'desc_tip' => true,

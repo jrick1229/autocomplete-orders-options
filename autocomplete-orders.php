@@ -1,14 +1,14 @@
 <?php
 /**
- * Plugin Name: Auto-Complete Orders - NEW
- * Plugin URI:  https://github.com/
+ * Plugin Name: Auto-Complete Orders Options
+ * Plugin URI:  https://github.com/jrick1229/autocomplete-orders-options
  * Description: Option to auto-complete all orders after successful payment - even subscription renewals.
  * Author:      jrick1229 / bernattorras
  * Author URI:  http://github.com/jrick1229
  * Version:     v1.0.0
  * License:     GPLv3
  *
- * GitHub Plugin URI: jrick1229/woocommerce-auto-complete-orders-select
+ * GitHub Plugin URI: jrick1229/autocomplete-orders-options
  * GitHub Branch: master
  *
  * Copyright 2018 Prospress, Inc.  (email : freedoms@prospress.com)

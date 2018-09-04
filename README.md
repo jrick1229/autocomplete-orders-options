@@ -1,4 +1,4 @@
-# Autocomplete Orders Options
+# Autocomplete Orders - Options
 
 For use with [WooCommerce](https://github.com/woocommerce/woocommerce) and [WooCommerce Subscriptions](https://woocommerce.com/products/woocommerce-subscriptions/).
 
